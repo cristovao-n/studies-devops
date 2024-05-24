@@ -66,3 +66,34 @@ List exited containers
 
 Get container logs  
 `docker logs CONTAINER_ID`  
+
+Stop running container  
+`docker stop CONTAINER_ID`  
+
+Execute a command in a running container  
+`docker exec -it CONTAINER_ID sh`  
+
+## Cleaning
+
+Remove unused Docker artifacts  
+`docker system prune -a`  
+
+# Docker Compose
+
+Docker compose is a tool available locally that implements basics fundamentals of container orchestration.  
+
+It's useful to run containers in a grouped way providing the same network interface, volume and so on.  
+
+## Usage
+
+Create a `docker-compose.yaml` file  
+
+Build image and run container  
+`docker-compose up --build -d`  
+
+Run container  
+`docker-compose up -d`  
+
+Stop container  
+`docker-compose down`  
+
