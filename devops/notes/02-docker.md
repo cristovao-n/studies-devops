@@ -97,3 +97,24 @@ Run container
 Stop container  
 `docker-compose down`  
 
+## Network
+
+[Docker compose network](https://docs.docker.com/compose/networking/)  
+
+If you need to expose the service to localhost, use `ports`:  
+
+```
+ports:
+  - "HOST_PORT:CONTAINER_PORT"
+```
+If you omit `HOST_PORT`, the service will be exposed to the host machine to a random port.  
+
+```
+ports:
+  - "CONTAINER_PORT"
+```
+
+It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`. Networked service-to-service communication uses the `CONTAINER_PORT`.  
+
+
+
