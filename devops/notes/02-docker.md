@@ -39,10 +39,10 @@ See downloaded images on your machine
 `docker images`
 
 Build an image according to a Dockerfile in current directory  
-`docker build -t image-name:tag .`  
+`docker build -t image-name:tag .`
 
 Build an image according to a `*.Dockerfile`  
-`docker build -t image-name:tag -f *.Dockerfile .`  
+`docker build -t image-name:tag -f *.Dockerfile .`
 
 > OBS: https://stackoverflow.com/questions/30179716/what-are-none-repository-and-tags-why-do-they-appear-when-i-use-docker-build
 > It's a good practice to always build an image with a new tag, to avoid <none> issues
@@ -56,65 +56,63 @@ Run a container in detached mode
 `docker run -p 3000:3000 -d image-name:tag`
 
 Run a container from an image overriding the CMD command  
-`docker run -p 3000:3000 -it image-name:tag sh`  
+`docker run -p 3000:3000 -it image-name:tag sh`
 
-List running containers
-`docker ps`  
+List running containers  
+`docker ps`
 
 List exited containers  
-`docker ps -a`  
+`docker ps -a`
 
 Get container logs  
-`docker logs CONTAINER_ID`  
+`docker logs CONTAINER_ID`
 
 Stop running container  
-`docker stop CONTAINER_ID`  
+`docker stop CONTAINER_ID`
 
 Execute a command in a running container  
-`docker exec -it CONTAINER_ID sh`  
+`docker exec -it CONTAINER_ID sh`
 
 ## Cleaning
 
 Remove unused Docker artifacts  
-`docker system prune -a`  
+`docker system prune -a`
 
 # Docker Compose
 
-Docker compose is a tool available locally that implements basics fundamentals of container orchestration.  
+Docker compose is a tool available locally that implements basics fundamentals of container orchestration.
 
-It's useful to run containers in a grouped way providing the same network interface, volume and so on.  
+It's useful to run containers in a grouped way providing the same network interface, volume and so on.
 
 ## Usage
 
-Create a `docker-compose.yaml` file  
+Create a `docker-compose.yaml` file
 
 Build image and run container  
-`docker-compose up --build -d`  
+`docker-compose up --build -d`
 
 Run container  
-`docker-compose up -d`  
+`docker-compose up -d`
 
 Stop container  
-`docker-compose down`  
+`docker-compose down`
 
 ## Network
 
-[Docker compose network](https://docs.docker.com/compose/networking/)  
+[Docker compose network](https://docs.docker.com/compose/networking/)
 
-If you need to expose the service to localhost, use `ports`:  
+If you need to expose the service to localhost, use `ports`:
 
 ```
 ports:
   - "HOST_PORT:CONTAINER_PORT"
 ```
-If you omit `HOST_PORT`, the service will be exposed to the host machine to a random port.  
+
+If you omit `HOST_PORT`, the service will be exposed to the host machine to a random port.
 
 ```
 ports:
   - "CONTAINER_PORT"
 ```
 
-It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`. Networked service-to-service communication uses the `CONTAINER_PORT`.  
-
-
-
+It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`. Networked service-to-service communication uses the `CONTAINER_PORT`.
