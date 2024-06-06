@@ -42,7 +42,7 @@ It has objects
 #### Objects
 
 -   pod: the place where the containers will run
--   replica set: creates new pod instances
+-   replicaset: controls pod instances
 -   deploy: contains configurations like: available resources for each pod, number of pod instances, etc
 -   horizontal pod autoscaler
     -   Creates and kills pod replicas according to the application workload
