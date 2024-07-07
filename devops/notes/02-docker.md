@@ -70,10 +70,16 @@ Get container logs
 Stop running container  
 `docker stop CONTAINER_ID`
 
+Start a stopped container  
+`docker start CONTAINER_ID`
+
 Execute a command in a running container  
 `docker exec -it CONTAINER_ID sh`
 
 ## Cleaning
+
+Remove container  
+`docker container rm CONTAINER_ID`
 
 Remove unused Docker artifacts  
 `docker system prune -a`
