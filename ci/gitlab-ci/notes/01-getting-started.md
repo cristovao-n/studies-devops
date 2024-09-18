@@ -17,7 +17,7 @@ Server machines configured to run the CI/CD jobs
 
 Gitlab offers a gitlab instance and gitlab runners to provide a fast getting started, but you can connect and setup your own infrastructure, which is a more professional and a common use case for companies
 
-## First steps
+## Getting started
 
 Building a CI/CD pipeline for an application doesn't require in-depth knowledge of the source code or its implementation details. However, you need a solid understanding of the following aspects to construct the pipeline:
 
@@ -33,7 +33,8 @@ Pipeline is written in YAML format and is hosted in the application's repository
 ### Jobs
 
 Jobs are the most fundamental building block of a `.gitlab-ci.yml` file  
-Jobs define what to do
+Jobs define what to do  
+Start the job name with a dot (.) and it'll be ignored by GitLab CI/CD. This is useful to define base jobs that'll be [extended](#extends) by other jobs
 
 #### Executors
 
@@ -51,9 +52,59 @@ The Gitlab Runner will use a shell executor or a docker executor
 -   You can specify the base image for your container
 -   Each job runs in a separate container
 
-#### Services
+#### API
 
-> TODO:
+##### Services
+
+TODO
+
+##### extends
+
+Use extends to reuse configuration sections.
+
+##### cache
+
+##### artifacts
+
+##### Triggering jobs
+
+You can configure `when` a job should run using `only`, `except` and `rules` properties  
+If a job doesn't have any explicit configuration for them, the job will run on every branch and for every pipeline (e.g., for pushes, merge requests, and tags).
+
+###### only
+
+Run the job `only` in the given situation  
+Example:
+
+```yml
+only:
+    - merge_requests
+```
+
+###### except
+
+Run the job in all situations, `except` in the given situation  
+Example:
+
+```yml
+except:
+    - merge_requests
+```
+
+###### rules
+
+Define a custom bash boolean expression that returns whether the job should run or not  
+Example:
+
+```yml
+rules:
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "production"
+      when: always
+```
+
+##### tags
+
+TODO
 
 #### Examples
 
@@ -117,13 +168,6 @@ job2:
 ...
 
 ## TODO
-
--   Artifacts
--   Caching
--   Job.Rules
--   Job.Extends
--   Job.Tags
--   Triggering jobs
 
 ---
 
