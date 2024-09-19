@@ -64,7 +64,30 @@ Use extends to reuse configuration sections.
 
 ##### cache
 
+You can define cache for packages and dependencies to avoid downloading them every single job.  
+Caches can be used by subsequent jobs and even subsequent new pipelines
+
+To improve the performance and usage of caches, it is recommended that you use a single runner for all your jobs that uses the cache. In this way the runner will have access to the cache in the subsequent attempts
+
+Example - Caching yarn dependencies
+
+```yml
+job:
+    script:
+        - echo 'yarn-offline-mirror ".yarn-cache/"' >> .yarnrc
+        - echo 'yarn-offline-mirror-pruning true' >> .yarnrc
+        - yarn install --frozen-lockfile --no-progress
+    cache:
+        key:
+            files:
+                - yarn.lock
+        paths:
+            - .yarn-cache/
+```
+
 ##### artifacts
+
+You can use artifacts to pass build and scripts results among jobs.
 
 ##### Triggering jobs
 
@@ -104,7 +127,19 @@ rules:
 
 ##### tags
 
-TODO
+Use tags to select a specific runner from the list of all runners that are available for the project.  
+When you register a runner, you can specify the runner’s tags, for example ruby, postgres, or development. To pick up and run a job, a runner must be assigned every tag listed in the job.
+
+Example of tags:
+
+```yml
+job:
+    tags:
+        - ruby
+        - postgres
+```
+
+In this example, only runners with both the ruby and postgres tags can run the job.
 
 #### Examples
 
@@ -137,8 +172,6 @@ build_image:
         - docker build -t
 ```
 
-> TODO: Find a simpler example
-
 ### Stages
 
 If we only specify the jobs, they'll run in parallel and no order is guaranteed  
@@ -165,13 +198,11 @@ job2:
 
 ## Configuring Runners
 
-...
-
-## TODO
-
 ---
 
 ## References
 
 Youtube Video: https://www.youtube.com/watch?v=qP8kir2GUgo&t=87s
 Demo Repository: https://gitlab.com/ncristovao/python-demoapp
+Gitlab Docs: https://docs.gitlab.com/ee/ci/yaml/
+
