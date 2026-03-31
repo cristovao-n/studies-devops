@@ -13,6 +13,8 @@ Kubernetes is an open source project from Google
     -   kubelet
     -   k-proxy
 
+Usando kubernetes com o EKS, quando um nó é criado uma máquina é criada no EC2
+
 ### Control Plane
 
 The Control Plane is the brain of the Kubernetes cluster.
